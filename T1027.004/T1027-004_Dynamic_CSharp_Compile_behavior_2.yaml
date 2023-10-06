@@ -1,0 +1,19 @@
+title: 'Arquivos ou Informações Ofuscados: Compilação Dinâmica de C#'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da execução de binários que compilam código C# dinamicamente. Adversários podem usar essa técnica para executar payloads sem escrevê-los no disco.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/004'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_execution'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+detection:
+  condition: command_line contains "T1027.004_DynamicCompile.exe"
+falsepositives:
+  - 'Execução legítima de binários que compilam código C# dinamicamente.'
+level: 'medium'

@@ -1,0 +1,23 @@
+title: 'OS Credential Dumping: Dump individual process memory with Python (Local)'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de copiar a memória do heap de um processo para um arquivo externo usando um script Python. Isso pode ser usado para pesquisar ou exfiltrar a memória do processo posteriormente.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/007'
+date: '2023-09-26'
+tags:
+  - 'T1003.007'
+  - 'Credential Access'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: '*python* dump_heap.py*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+  - 'Uso legítimo de scripts Python por usuários ou aplicações'
+level: 'high'

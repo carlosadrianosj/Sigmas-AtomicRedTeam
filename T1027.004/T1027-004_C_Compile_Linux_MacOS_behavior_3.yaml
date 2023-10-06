@@ -1,0 +1,19 @@
+title: 'Arquivos ou Informações Ofuscados: Compilação de Código C no Linux/MacOS'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da compilação de código C usando gcc ou clang no Linux ou MacOS. Adversários podem usar essa técnica para compilar e executar payloads entregues como código-fonte.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/004'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_execution'
+logsource:
+  product: 'unix'
+  service: 'auditd'
+detection:
+  condition: (process_name == "gcc" or process_name == "clang") and command_line contains "T1027-004-test.c"
+falsepositives:
+  - 'Desenvolvimento legítimo em C que utiliza gcc ou clang para compilação.'
+level: 'medium'

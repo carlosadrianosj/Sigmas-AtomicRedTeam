@@ -1,0 +1,24 @@
+title: 'Dump de Credenciais com Gsecdump'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a extração de credenciais da memória usando Gsecdump.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003'
+  - 'https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/'
+date: '2023-09-26'
+tags:
+  - 'T1003'
+  - 'Credential Dumping'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\gsecdump.exe'
+    CommandLine: '* -a'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam Gsecdump para fins de diagnóstico.'
+level: 'high'

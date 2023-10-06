@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - adidnsdump'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of adidnsdump tool to enumerate and export all DNS records in the zone for recon purposes of internal networks.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'windows'
+  service: 'command_prompt'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'adidnsdump*'
+  condition: selection
+falsepositives:
+  - 'Legitimate administrative activity'
+level: 'high'

@@ -1,0 +1,25 @@
+title: 'Executar Comando Escrevendo Saída para Compartilhamento Admin Local'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de executar um comando e escrever a saída para um compartilhamento Admin local.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/002'
+date: '2023-09-29'
+tags:
+  - 'T1021.002'
+  - 'SMB'
+  - 'AdminShare'
+logsource:
+  product: 'windows'
+  service: 'cmd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*cmd.exe /Q /c* 1> \\127.0.0.1\ADMIN$*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Comandos autorizados que escrevem para compartilhamentos Admin.'
+level: 'medium'

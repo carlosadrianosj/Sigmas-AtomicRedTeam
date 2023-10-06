@@ -1,0 +1,19 @@
+title: 'Arquivos ou Informações Ofuscados: Software Empacotado com UPX e Cabeçalhos Modificados no macOS'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da utilização de binários empacotados com UPX e com cabeçalhos modificados no macOS. A modificação dos cabeçalhos pode dificultar a detecção e descompressão do binário.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/002'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_execution'
+logsource:
+  product: 'macos'
+  service: 'auditd'
+detection:
+  condition: command_line contains "/tmp/packed_bin"
+falsepositives:
+  - 'Uso legítimo de binários empacotados com UPX com cabeçalhos modificados para fins não maliciosos.'
+level: 'medium'

@@ -1,0 +1,23 @@
+title: 'Rootkit Baseado em Linker Dinâmico (libprocesshider)'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de ocultar um processo específico via ld.so.preload usando libprocesshider.'
+references:
+  - 'https://attack.mitre.org/techniques/T1014'
+date: '2023-09-26'
+tags:
+  - 'T1014'
+  - 'Persistence'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'file'
+detection:
+  selection:
+    path: '/etc/ld.so.preload'
+    key: 'write'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+level: 'high'

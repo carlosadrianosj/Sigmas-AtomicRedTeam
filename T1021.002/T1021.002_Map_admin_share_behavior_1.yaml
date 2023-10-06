@@ -1,0 +1,25 @@
+title: 'Conexão a Compartilhamentos Remotos'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de conectar a um compartilhamento remoto via SMB.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/002'
+date: '2023-09-29'
+tags:
+  - 'T1021.002'
+  - 'SMB'
+  - 'AdminShare'
+logsource:
+  product: 'windows'
+  service: 'cmd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*net use \\*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Conexões SMB autorizadas.'
+level: 'medium'

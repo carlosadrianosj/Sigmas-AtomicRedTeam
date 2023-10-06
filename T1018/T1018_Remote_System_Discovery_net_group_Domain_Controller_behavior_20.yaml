@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - net group Domain Controller'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of net.exe querying the Active Directory Domain Controller.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'windows'
+  service: 'cmd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'net group /domain "Domain controllers"'
+  condition: selection
+falsepositives:
+  - 'Legitimate administrative activity'
+level: 'medium'

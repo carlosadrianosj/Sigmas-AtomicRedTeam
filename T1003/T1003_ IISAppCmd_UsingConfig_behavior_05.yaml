@@ -1,0 +1,24 @@
+title: 'Recuperar Credenciais da Conta de Serviço do Microsoft IIS Usando AppCmd (usando config)'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de recuperar credenciais da conta de serviço do Microsoft IIS usando o comando config do AppCmd.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003'
+  - 'https://twitter.com/0gtweet/status/1588815661085917186?cxt=HHwWhIDUyaDbzYwsAAAA'
+date: '2023-09-26'
+tags:
+  - 'T1003'
+  - 'Credential Dumping'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'C:\\Windows\\System32\\inetsrv\\appcmd.exe'
+    CommandLine: '*list apppool /config'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam AppCmd para gerenciar o IIS.'
+level: 'medium'

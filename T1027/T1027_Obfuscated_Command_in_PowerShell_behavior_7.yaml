@@ -1,0 +1,19 @@
+title: 'Comando Ofuscado em PowerShell'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção de comandos ofuscados sendo executados no PowerShell. Adversários podem usar essa técnica para evitar detecções baseadas em assinaturas.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'powershell'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+detection:
+  condition: command contains "Invoke-Expression" or command contains "IEX"
+falsepositives:
+  - 'Scripts legítimos que usam ofuscação para proteger o código.'
+level: 'high'

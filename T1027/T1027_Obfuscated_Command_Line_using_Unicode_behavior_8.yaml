@@ -1,0 +1,19 @@
+title: 'Linha de Comando Ofuscada usando Caracteres Unicode'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção de comandos ofuscados usando caracteres Unicode especiais. Adversários podem usar essa técnica para evitar detecções baseadas em assinaturas.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'unicode'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+detection:
+  condition: command contains "certutil" and command contains "—ૹu૰rlࢰca࣢c෯he"
+falsepositives:
+  - 'Comandos legítimos que usam caracteres Unicode por razões legítimas.'
+level: 'medium'

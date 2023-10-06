@@ -1,0 +1,22 @@
+title: 'System Service Discovery via net.exe'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de descobrir serviços do sistema usando net.exe.'
+references:
+  - 'https://attack.mitre.org/techniques/T1007'
+tags:
+  - 'T1007'
+  - 'System Service Discovery'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\net.exe'
+    CommandLine: '*start*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema e diagnóstico.'
+level: 'medium'

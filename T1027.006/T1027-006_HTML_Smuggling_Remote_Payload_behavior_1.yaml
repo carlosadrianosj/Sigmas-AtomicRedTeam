@@ -1,0 +1,20 @@
+title: 'HTML Smuggling: Carga Remota'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção do uso de HTML Smuggling para baixar uma carga (payload) remota sem interação do usuário. Adversários podem usar essa técnica para contrabandear dados e arquivos passando por filtros de conteúdo, escondendo cargas maliciosas dentro de arquivos HTML aparentemente benignos.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/006'
+  - 'https://outflank.nl/blog/2018/08/14/html-smuggling-explained/'
+date: '2023-10-03'
+tags:
+  - 'data_obfuscation'
+  - 'file_download'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+detection:
+  condition: file_name == "T1027_006_remote.html" and file_path contains "PathToAtomicsFolder\\T1027.006\\bin\\"
+falsepositives:
+  - 'Execução legítima de arquivos HTML que utilizam técnicas similares para fins não maliciosos.'
+level: 'high'

@@ -1,0 +1,27 @@
+title: 'Exfiltração Automatizada via IcedID Botnet HTTP PUT'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de exfiltração de dados usando o método HTTP PUT, que é uma característica do botnet IcedID.'
+references:
+  - 'https://attack.mitre.org/techniques/T1020'
+  - 'https://attack.mitre.org/techniques/T1041'
+  - 'https://attack.mitre.org/techniques/T1048'
+date: '2023-09-29'
+tags:
+  - 'T1020'
+  - 'Exfiltração'
+  - 'IcedID'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*Invoke-WebRequest* -Method Put -ContentType application/octet-stream*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam o método HTTP PUT.'
+  - 'Ferramentas de desenvolvimento que fazem uso do método HTTP PUT.'
+level: 'high'

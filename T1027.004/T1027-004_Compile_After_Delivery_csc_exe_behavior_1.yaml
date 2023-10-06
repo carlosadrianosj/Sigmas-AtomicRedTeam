@@ -1,0 +1,19 @@
+title: 'Arquivos ou Informações Ofuscados: Compilação após Entrega usando csc.exe'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da compilação de código C# usando o binário csc.exe fornecido pelo .NET. Adversários podem usar essa técnica para compilar e executar payloads entregues como código-fonte.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/004'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_execution'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+detection:
+  condition: process_name == "csc.exe" and command_line contains "C:\\Windows\\Temp\\T1027.004.exe"
+falsepositives:
+  - 'Desenvolvimento legítimo em C# que utiliza o csc.exe para compilação.'
+level: 'medium'

@@ -1,0 +1,23 @@
+title: 'T1003.001 - LSASS Memory Read with pypykatz'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects an attempt to parse secrets hidden in the LSASS process with pypykatz.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/001'
+date: '2023-09-26'
+tags:
+  - 'T1003.001'
+  - 'Credential Access'
+logsource:
+  product: 'windows'
+  service: 'security'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\pypykatz.exe'
+    CommandLine: '*live lsa*'
+  condition: selection
+falsepositives:
+  - 'Authorized administrative activity'
+level: 'high'

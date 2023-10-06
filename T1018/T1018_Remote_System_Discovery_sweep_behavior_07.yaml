@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - sweep'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects a ping sweep on Linux/macOS systems to identify active IP addresses in a specific range.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'linux'
+  service: 'shell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'for ip in $(seq * *); do ping -c 1 *.$ip; [ $? -eq 0 ] && echo "*.$ip UP" || : ; done'
+  condition: selection
+falsepositives:
+  - 'Network diagnostics'
+level: 'medium'

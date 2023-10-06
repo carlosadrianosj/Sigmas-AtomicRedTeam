@@ -1,0 +1,23 @@
+title: 'OS Credential Dumping: Acesso ao /etc/passwd (Local)'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de acessar o arquivo /etc/passwd em ambientes Linux. Este arquivo contém informações de conta do usuário.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/008'
+date: '2023-09-26'
+tags:
+  - 'T1003.008'
+  - 'Credential Access'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'file_access'
+detection:
+  selection:
+    FilePath: '/etc/passwd'
+    Access: 'read'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+level: 'medium'

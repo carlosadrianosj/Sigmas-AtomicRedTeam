@@ -1,0 +1,24 @@
+title: 'Acesso WinRM com Evil-WinRM'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de usar Evil-WinRM com uma conta válida para interagir com sistemas remotos que têm WinRM habilitado.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/006'
+date: '2023-10-03'
+tags:
+  - 'T1021.006'
+  - 'WinRM'
+  - 'Evil-WinRM'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process'
+detection:
+  selection:
+    CommandLine:
+      - '*evil-winrm -i*'
+  condition: selection
+falsepositives:
+  - 'Uso legítimo do Evil-WinRM por administradores ou ferramentas de teste.'
+level: 'high'

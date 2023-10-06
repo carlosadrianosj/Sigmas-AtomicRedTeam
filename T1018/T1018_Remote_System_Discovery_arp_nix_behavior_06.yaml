@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - arp nix'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of arp command on Linux/macOS systems to list out the arp cache.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'linux'
+  service: 'shell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'arp -a | grep -v '^?''
+  condition: selection
+falsepositives:
+  - 'Network diagnostics'
+level: 'medium'

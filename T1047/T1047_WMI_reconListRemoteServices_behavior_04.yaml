@@ -1,0 +1,23 @@
+title: 'Reconhecimento de Serviços Remotos via WMI | Behavior 04'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta um adversário usando WMI para verificar se um determinado serviço remoto está em execução em um dispositivo remoto.'
+references:
+  - 'https://attack.mitre.org/techniques/T1047'
+date: '2023-09-26'
+tags:
+  - 'T1047'
+  - 'WMI'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'C:\\Windows\\System32\\wbem\\WMIC.exe'
+    CommandLine: '*service where (caption like "%*%")*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam WMIC para consultar serviços remotos.'
+level: 'medium'

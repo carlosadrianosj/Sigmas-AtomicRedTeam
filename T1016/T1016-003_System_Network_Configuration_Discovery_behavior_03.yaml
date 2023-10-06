@@ -1,0 +1,26 @@
+title: 'System Network Configuration Discovery on Linux/macOS'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção de comandos frequentemente usados para descobrir a configuração de rede em sistemas Linux e macOS.'
+references:
+  - 'https://attack.mitre.org/techniques/T1016'
+date: '2023-09-26'
+tags:
+  - 'T1016'
+  - 'Discovery'
+logsource:
+  product: 'unix'
+  service: 'shell'
+  category: null
+detection:
+  selection:
+    CommandLine:
+      - 'arp -a'
+      - 'ifconfig'
+      - 'ip addr'
+      - 'netstat -ant'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema'
+level: 'medium'

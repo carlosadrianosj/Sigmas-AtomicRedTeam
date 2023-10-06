@@ -1,0 +1,19 @@
+title: 'Execução de PowerShell Codificado em base64 a partir do Registro do Windows'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da armazenamento e execução de comandos PowerShell codificados em base64 a partir do Registro do Windows.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'registry'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+detection:
+  condition: command contains "Set-ItemProperty" and command contains "powershell.exe -Command"
+falsepositives:
+  - 'Scripts legítimos que armazenam e executam comandos do Registro.'
+level: 'high'

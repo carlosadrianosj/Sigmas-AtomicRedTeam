@@ -1,0 +1,23 @@
+title: 'OS Credential Dumping: Dump individual process memory with sh (Local)'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de copiar a memória do processo para um arquivo externo usando utilitários de shell. Isso pode ser usado para pesquisar ou exfiltrar a memória do processo posteriormente.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/007'
+date: '2023-09-26'
+tags:
+  - 'T1003.007'
+  - 'Credential Access'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: '*dd if=/proc/*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+  - 'Uso legítimo de utilitários de shell por usuários ou aplicações'
+level: 'high'

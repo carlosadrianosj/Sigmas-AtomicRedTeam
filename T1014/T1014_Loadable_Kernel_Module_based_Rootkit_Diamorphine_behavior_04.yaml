@@ -1,0 +1,23 @@
+title: 'Rootkit Diamorphine Baseado em Módulo de Kernel Carregável'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de carregar o módulo de kernel Diamorphine para ocultar sua presença e processos no sistema.'
+references:
+  - 'https://attack.mitre.org/techniques/T1014'
+date: '2023-09-26'
+tags:
+  - 'T1014'
+  - 'Persistence'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'process_creation'
+detection:
+  selection:
+    exe: '/usr/sbin/modprobe'
+    cmd: '*diamorphine*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+level: 'high'
