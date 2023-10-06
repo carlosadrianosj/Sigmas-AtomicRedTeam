@@ -1,0 +1,24 @@
+title: 'System Service Discovery via Tasklist and SC Query'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de descobrir serviços do sistema usando tasklist.exe e sc query.'
+references:
+  - 'https://attack.mitre.org/techniques/T1007'
+tags:
+  - 'T1007'
+  - 'System Service Discovery'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\tasklist.exe'
+  selection2:
+    Image: '*\sc.exe'
+    CommandLine: '*query*'
+  condition: selection or selection2
+falsepositives:
+  - 'Administração legítima do sistema e diagnóstico.'
+level: 'medium'

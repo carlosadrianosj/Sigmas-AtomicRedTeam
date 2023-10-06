@@ -1,0 +1,26 @@
+title: 'Tentativa de Acesso RDP a um Controlador de Domínio'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de estabelecer uma sessão RDP para um controlador de domínio.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/001'
+date: '2023-10-03'
+tags:
+  - 'T1021.001'
+  - 'RDP'
+  - 'DomainController'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*cmdkey /generic:TERMSRV/*'
+      - '*mstsc /v:*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Acessos RDP autorizados.'
+level: 'high'

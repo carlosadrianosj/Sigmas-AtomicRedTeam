@@ -1,0 +1,24 @@
+title: 'Dump de Credenciais com NPPSpy'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a alteração da chave ProviderOrder do Registro e cria uma chave para NPPSpy. Após o login do usuário, a senha em texto simples é salva em C:\NPPSpy.txt.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003'
+  - 'https://github.com/gtworek/PSBits/tree/master/PasswordStealing/NPPSpy'
+date: '2023-09-26'
+tags:
+  - 'T1003'
+  - 'Credential Dumping'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'registry_event'
+detection:
+  selection:
+    TargetObject: '*\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order'
+    Details: '*NPPSpy*'
+  condition: selection
+falsepositives:
+  - 'Alterações legítimas na chave ProviderOrder do Registro.'
+level: 'high'

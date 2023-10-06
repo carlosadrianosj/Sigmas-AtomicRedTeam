@@ -1,0 +1,25 @@
+title: 'Direct Volume Access - Read volume boot sector via DOS device path'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de acessar diretamente um volume para ler o setor de inicialização via caminho de dispositivo DOS usando PowerShell. Isso pode ser usado para contornar controles de acesso a arquivos e monitoramento do sistema de arquivos.'
+references:
+  - 'https://attack.mitre.org/techniques/T1006'
+  - 'https://docs.microsoft.com/en-us/dotnet/standard/io/file-path-formats#dos-device-paths'
+tags:
+  - 'T1006'
+  - 'Direct Volume Access'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\powershell.exe'
+    CommandLine: '*\\.*'
+    CommandLine: '*New-Object IO.FileStream*'
+    CommandLine: '*Format-Hex*'
+  condition: selection
+falsepositives:
+  - 'Scripts administrativos que acessam diretamente volumes para fins de diagnóstico ou recuperação.'
+level: 'high'

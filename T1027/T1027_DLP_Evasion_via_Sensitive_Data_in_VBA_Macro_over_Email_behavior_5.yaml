@@ -1,0 +1,20 @@
+title: 'Evasão DLP via Dados Sensíveis em Macro VBA via Email'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção do envio de um arquivo Excel contendo uma Macro VBA com dados sensíveis via email. Adversários podem usar essa técnica para exfiltrar dados sensíveis, como números de cartão de crédito, através de emails.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'exfiltration'
+  - 'vba'
+  - 'email'
+logsource:
+  product: 'windows'
+  service: 'email'
+detection:
+  condition: email_attachment contains ".xlsm" and email_body contains "VBA Macro"
+falsepositives:
+  - 'Envio legítimo de arquivos Excel com macros via email.'
+level: 'high'

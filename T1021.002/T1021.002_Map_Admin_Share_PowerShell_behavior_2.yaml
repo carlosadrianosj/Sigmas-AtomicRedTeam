@@ -1,0 +1,25 @@
+title: 'Mapear Compartilhamento Admin Utilizando PowerShell'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de mapear um compartilhamento Admin usando PowerShell.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/002'
+date: '2023-09-29'
+tags:
+  - 'T1021.002'
+  - 'SMB'
+  - 'AdminShare'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*New-PSDrive -name* -psprovider filesystem -root \\*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Mapeamentos de drive autorizados.'
+level: 'medium'

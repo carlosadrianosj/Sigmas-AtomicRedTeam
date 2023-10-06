@@ -1,0 +1,22 @@
+title: 'Application Window Discovery via C# .NET'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de listar títulos de janelas principais associados a cada processo usando C# .NET.'
+references:
+  - 'https://attack.mitre.org/techniques/T1010'
+tags:
+  - 'T1010'
+  - 'Application Window Discovery'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\csc.exe'
+    CommandLine: '*-out:%TEMP%\T1010.exe*'
+  condition: selection
+falsepositives:
+  - 'Desenvolvimento legítimo em C# .NET.'
+level: 'medium'

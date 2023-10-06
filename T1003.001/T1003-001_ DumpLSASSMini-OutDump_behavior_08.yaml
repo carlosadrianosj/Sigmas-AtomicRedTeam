@@ -1,0 +1,22 @@
+title: 'T1003.001 - LSASS Memory Dump via Out-Minidump.ps1'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects an attempt to dump LSASS memory using Out-Minidump.ps1 PowerShell script.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/001'
+date: '2023-09-26'
+tags:
+  - 'T1003.001'
+  - 'Credential Access'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'script'
+detection:
+  selection:
+    ScriptBlockText: '*Out-Minidump*lsass*'
+  condition: selection
+falsepositives:
+  - 'Authorized administrative activity'
+level: 'high'

@@ -1,0 +1,19 @@
+title: 'Obfuscation de Arquivos ou Informações: Preenchimento Binário com truncate'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da utilização do comando truncate para adicionar bytes a um binário com o objetivo de alterar seu hash. Adversários podem usar essa técnica para evitar detecções baseadas em hash.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/001'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_modification'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+detection:
+  condition: command_line contains "truncate" and command_line contains "-s +1"
+falsepositives:
+  - 'Uso legítimo do comando truncate para outras finalidades.'
+level: 'medium'

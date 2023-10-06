@@ -1,0 +1,21 @@
+title: 'Get-WmiObject to Enumerate Domain Controllers'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of get-wmiobject to enumerate Active Directory for Domain Controllers.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'get-wmiobject -class ds_computer*'
+  condition: selection
+falsepositives:
+  - 'Legitimate administrative activity'
+level: 'medium'

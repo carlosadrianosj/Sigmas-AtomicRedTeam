@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - ping sweep'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of a ping sweep to identify remote systems in a specific IP range.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'windows'
+  service: 'command_prompt'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: 'for /l %i in (*,1,*) do ping -n 1 -w 100 *.%i'
+  condition: selection
+falsepositives:
+  - 'Network diagnostics'
+level: 'medium'

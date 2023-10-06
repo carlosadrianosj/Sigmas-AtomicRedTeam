@@ -1,0 +1,24 @@
+title: 'Reconhecimento de Usuários via WMI | Behavior 01'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta um adversário usando WMI para listar todas as contas de usuário locais. Esta é uma técnica comum de reconhecimento para coletar informações sobre usuários locais em um host comprometido.'
+references:
+  - 'https://attack.mitre.org/techniques/T1047'
+  - 'https://www.fireeye.com/blog/threat-research/2015/04/proactive_threat_hun.html'
+date: '2023-09-26'
+tags:
+  - 'T1047'
+  - 'WMI'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'C:\\Windows\\System32\\wbem\\WMIC.exe'
+    CommandLine: '*useraccount get /ALL /format:csv*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam WMIC para consultar contas de usuário.'
+level: 'medium'

@@ -1,0 +1,21 @@
+title: 'Remote System Discovery - nslookup'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects the use of nslookup command against the local /24 network of the first network adaptor listed in ipconfig.'
+references:
+  - 'https://attack.mitre.org/techniques/T1018'
+date: '2023-09-26'
+tags:
+  - 'T1018'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: '*nslookup*'
+  condition: selection
+falsepositives:
+  - 'Domain name resolution diagnostics'
+level: 'medium'

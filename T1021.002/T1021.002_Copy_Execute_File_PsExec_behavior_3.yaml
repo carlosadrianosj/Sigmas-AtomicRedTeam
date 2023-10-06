@@ -1,0 +1,25 @@
+title: 'Copiar e Executar Arquivo com PsExec'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de copiar um arquivo para um host remoto e executá-lo usando PsExec.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/002'
+date: '2023-09-29'
+tags:
+  - 'T1021.002'
+  - 'SMB'
+  - 'PsExec'
+logsource:
+  product: 'windows'
+  service: 'cmd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*psexec* -accepteula -c*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Uso autorizado do PsExec.'
+level: 'high'

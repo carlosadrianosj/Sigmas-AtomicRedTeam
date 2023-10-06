@@ -1,0 +1,19 @@
+title: 'Arquivos ou Informações Ofuscados: Compilação de Código Go no Linux/MacOS'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da compilação e execução de código Go no Linux ou MacOS usando o comando go run. Adversários podem usar essa técnica para compilar e executar payloads entregues como código-fonte.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027/004'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'file_execution'
+logsource:
+  product: 'unix'
+  service: 'auditd'
+detection:
+  condition: process_name == "go" and command_line contains "T1027-004-test.go"
+falsepositives:
+  - 'Desenvolvimento legítimo em Go que utiliza o comando go run para execução.'
+level: 'medium'

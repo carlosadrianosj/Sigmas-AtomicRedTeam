@@ -1,0 +1,27 @@
+title: 'System Network Configuration Discovery on Windows'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção de comandos frequentemente usados para descobrir a configuração de rede em sistemas Windows.'
+references:
+  - 'https://attack.mitre.org/techniques/T1016'
+date: '2023-09-26'
+tags:
+  - 'T1016'
+  - 'Discovery'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+  category: null
+detection:
+  selection:
+    CommandLine:
+      - 'ipconfig /all'
+      - 'netsh interface show interface'
+      - 'arp -a'
+      - 'nbtstat -n'
+      - 'net config'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema'
+level: 'medium'

@@ -1,0 +1,19 @@
+title: 'Decodificação de Dados base64 em Script'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção de decodificação de dados base64 em um script executável. Adversários podem usar essa técnica para ocultar payloads ou comandos.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'base64'
+logsource:
+  product: 'unix'
+  service: 'shell'
+detection:
+  condition: command contains "base64 -d" and command contains "/tmp/art.sh"
+falsepositives:
+  - 'Scripts legítimos que usam base64 para decodificação.'
+level: 'medium'

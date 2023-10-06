@@ -1,0 +1,22 @@
+title: 'List Windows Firewall Rules'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da enumeração de regras do Firewall do Windows usando netsh.'
+references:
+  - 'https://attack.mitre.org/techniques/T1016'
+date: '2023-09-26'
+tags:
+  - 'T1016'
+  - 'Discovery'
+logsource:
+  product: 'windows'
+  service: 'command_line'
+  category: null
+detection:
+  selection:
+    CommandLine: 'netsh advfirewall firewall show rule name=all'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema'
+level: 'medium'

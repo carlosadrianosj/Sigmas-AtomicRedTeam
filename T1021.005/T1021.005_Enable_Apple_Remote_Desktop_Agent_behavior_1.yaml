@@ -1,0 +1,26 @@
+title: 'Ativação do Agente Apple Remote Desktop'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de ativar o Agente Apple Remote Desktop (ARD) em um sistema macOS. O ARD pode ser abusado por adversários para obter execução remota de código e realizar movimento lateral.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/005'
+  - 'https://www.mandiant.com/resources/blog/leveraging-apple-remote-desktop-for-good-and-evil'
+date: '2023-10-03'
+tags:
+  - 'T1021.005'
+  - 'VNC'
+  - 'ARD'
+logsource:
+  product: 'macos'
+  service: 'process_creation'
+  category: 'process'
+detection:
+  selection:
+    CommandLine:
+      - '*kickstart -activate -configure -allowAccessFor -allUsers -privs -all -quiet*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Ativação autorizada do Apple Remote Desktop por administradores.'
+level: 'high'

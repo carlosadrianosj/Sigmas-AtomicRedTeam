@@ -1,0 +1,24 @@
+title: 'Dump do Gerenciador de Credenciais usando keymgr.dll e rundll32.exe'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a tentativa de abrir a janela do Gerenciador de Credenciais usando keymgr.dll e rundll32.exe.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003'
+  - 'https://twitter.com/0gtweet/status/1415671356239216653'
+date: '2023-09-26'
+tags:
+  - 'T1003'
+  - 'Credential Dumping'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'rundll32.exe'
+    CommandLine: '*keymgr,KRShowKeyMgr'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que acessam o Gerenciador de Credenciais.'
+level: 'medium'

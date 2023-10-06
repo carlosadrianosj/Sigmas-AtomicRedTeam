@@ -1,0 +1,23 @@
+title: 'Consulta ao Registro do Windows com Cmdlets do Powershell'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de consultar várias chaves do Registro do Windows usando cmdlets do Powershell.'
+references:
+  - 'https://attack.mitre.org/techniques/T1012'
+date: '2023-09-26'
+tags:
+  - 'T1012'
+  - 'Discovery'
+logsource:
+  product: 'windows'
+  service: 'sysmon'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+    CommandLine: '*Get-Item*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+level: 'medium'

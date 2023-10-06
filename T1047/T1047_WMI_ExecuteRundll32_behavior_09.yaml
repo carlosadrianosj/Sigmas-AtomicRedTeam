@@ -1,0 +1,23 @@
+title: 'Execução de rundll32 via WMI | Behavior 09'
+id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta o uso de WMI para executar uma função DLL usando rundll32.'
+references:
+  - 'https://attack.mitre.org/techniques/T1047'
+date: '2023-09-26'
+tags:
+  - 'T1047'
+  - 'WMI'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: 'C:\\Windows\\System32\\wbem\\WMIC.exe'
+    CommandLine: '*process call create "rundll32.exe*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas legítimas que usam rundll32 via WMIC.'
+level: 'medium'

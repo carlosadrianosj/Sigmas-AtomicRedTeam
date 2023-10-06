@@ -1,0 +1,19 @@
+title: 'Execução de PowerShell Codificado em base64'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da execução de comandos PowerShell codificados em base64. Adversários podem usar essa técnica para ocultar comandos maliciosos.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'obfuscation'
+  - 'powershell'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+detection:
+  condition: command contains "-EncodedCommand"
+falsepositives:
+  - 'Scripts legítimos que usam codificação base64 para comandos PowerShell.'
+level: 'high'

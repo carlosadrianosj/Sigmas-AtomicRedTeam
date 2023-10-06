@@ -1,0 +1,25 @@
+title: 'Desativar NLA para RDP via Command Prompt'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a desativação da autenticação de nível de rede (NLA) para RDP através de uma chave de registro via Command Prompt.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/001'
+date: '2023-10-03'
+tags:
+  - 'T1021.001'
+  - 'RDP'
+  - 'NLA'
+logsource:
+  product: 'windows'
+  service: 'cmd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*reg add*Terminal Server*WinStations*RDP-Tcp*UserAuthentication*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Configurações de RDP autorizadas.'
+level: 'medium'

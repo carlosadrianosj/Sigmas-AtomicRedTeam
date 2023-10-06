@@ -1,0 +1,23 @@
+title: 'T1003.001 - LSASS Mini Dump via ProcDump'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detects an attempt to create a mini dump of LSASS using ProcDump.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/001'
+date: '2023-09-26'
+tags:
+  - 'T1003.001'
+  - 'Credential Access'
+logsource:
+  product: 'windows'
+  service: 'security'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\procdump.exe'
+    CommandLine: '*-mm lsass.exe*'
+  condition: selection
+falsepositives:
+  - 'Authorized administrative activity'
+level: 'high'

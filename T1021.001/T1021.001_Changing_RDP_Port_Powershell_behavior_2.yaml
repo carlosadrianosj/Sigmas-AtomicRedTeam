@@ -1,0 +1,25 @@
+title: 'Alteração da Porta RDP para Porta Não Padrão via Powershell'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a alteração da porta RDP para uma porta não padrão usando o Powershell.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/001'
+date: '2023-10-03'
+tags:
+  - 'T1021.001'
+  - 'RDP'
+  - 'PortChange'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine:
+      - '*Set-ItemProperty -Path*Terminal Server*WinStations*RDP-Tcp*PortNumber*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Alterações de porta RDP autorizadas.'
+level: 'medium'

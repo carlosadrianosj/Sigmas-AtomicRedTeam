@@ -1,0 +1,24 @@
+title: 'Ativação do Windows Remote Management (WinRM)'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de ativar o Windows Remote Management (WinRM) em um sistema Windows. O WinRM pode ser abusado por adversários para obter execução remota de código.'
+references:
+  - 'https://attack.mitre.org/techniques/T1021/006'
+date: '2023-10-03'
+tags:
+  - 'T1021.006'
+  - 'WinRM'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process'
+detection:
+  selection:
+    CommandLine:
+      - '*Enable-PSRemoting -Force*'
+  condition: selection
+falsepositives:
+  - 'Administração legítima do sistema.'
+  - 'Ativação autorizada do WinRM por administradores.'
+level: 'high'

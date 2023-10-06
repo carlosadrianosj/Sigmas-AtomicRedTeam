@@ -1,0 +1,22 @@
+title: 'OS Credential Dumping: Acesso aos arquivos /etc/passwd e /etc/shadow usando builtins do bash'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta uma tentativa de acessar os arquivos /etc/passwd e /etc/shadow usando builtins do bash em ambientes Linux.'
+references:
+  - 'https://attack.mitre.org/techniques/T1003/008'
+date: '2023-09-26'
+tags:
+  - 'T1003.008'
+  - 'Credential Access'
+logsource:
+  product: 'linux'
+  service: 'auditd'
+  category: 'process_creation'
+detection:
+  selection:
+    CommandLine: '*testcat /etc/passwd*'
+  condition: selection
+falsepositives:
+  - 'Atividades administrativas autorizadas'
+level: 'medium'

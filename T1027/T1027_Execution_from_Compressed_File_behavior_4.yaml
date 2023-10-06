@@ -1,0 +1,19 @@
+title: 'Execução a partir de Arquivo Comprimido'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecção da execução de um arquivo após ser descomprimido. Adversários podem usar essa técnica para ocultar malwares ou ferramentas.'
+references:
+  - 'https://attack.mitre.org/techniques/T1027'
+date: '2023-10-03'
+tags:
+  - 'compressed'
+  - 'execution'
+logsource:
+  product: 'windows'
+  service: 'file'
+detection:
+  condition: file_path contains "%temp%\temp_T1027.zip\T1027.exe"
+falsepositives:
+  - 'Execução legítima de arquivos após descompressão.'
+level: 'medium'

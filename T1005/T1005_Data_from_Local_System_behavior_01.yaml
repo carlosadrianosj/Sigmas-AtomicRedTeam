@@ -1,0 +1,24 @@
+title: 'Data from Local System - Search files of interest and save them to a single zip file'
+id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+status: test
+author: 'Carlos Adriano'
+description: 'Detecta a busca por arquivos de certas extensões e os salva em um único arquivo zip antes da extração.'
+references:
+  - 'https://attack.mitre.org/techniques/T1005'
+tags:
+  - 'T1005'
+  - 'Data from Local System'
+logsource:
+  product: 'windows'
+  service: 'powershell'
+  category: 'process_creation'
+detection:
+  selection:
+    Image: '*\powershell.exe'
+    CommandLine: '*Get-ChildItem*'
+    CommandLine: '*Where-Object*'
+    CommandLine: '*Compress-Archive*'
+  condition: selection
+falsepositives:
+  - 'Scripts administrativos que buscam e compactam arquivos regularmente.'
+level: 'high'
